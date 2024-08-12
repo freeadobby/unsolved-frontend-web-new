@@ -1,0 +1,59 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mypage/layout.html}"
+      layout:fragment="MyPage_Content"
+>
+
+<div class="d-flex gap-5 justify-content-center py-3" style="border-bottom: 3px solid lightgray">
+    <a href="/mypage" class="text-decoration-none fw-bold" style="color:black">개요</a>
+    <a href="/mypage/today" class="text-decoration-none fw-bold" style="color:black; border-bottom: 3px solid black">오늘의 학습목록</a>
+    <a href="/mypage/solved" class="text-decoration-none fw-bold" style="color:black">문제</a>
+    <a href="#" class="text-decoration-none fw-bold" style="color:black">히스토리</a>
+    <a href="#" class="text-decoration-none fw-bold" style="color:black">내가 쓴 글</a>
+</div>
+
+<div class="row">
+    <div class="col"></div>
+    <div class="col-8">
+        <table class="mt-3" style="width:100%; text-align: center;">
+            <thead class="table-light" style="border-bottom:2px lightgray solid;">
+            <th style="width:8%">Tier</th>
+            <th style="width:8%">#</th>
+            <th>제목</th>
+            <th style="width:5%">Tag</th>
+            </thead>
+            <tbody>
+            <tr th:each="problem:${analysis.solvedTodayProblemList.problemList}" style="border-bottom:2px lightgray solid; text-align: center;">
+                <td>
+                    <span th:if="${problem.level} == 0">Unrated</span>
+                    <span th:if="${problem.level} >= 1 and ${problem.level} <= 5">Copper</span>
+                    <span th:if="${problem.level} >= 6 and ${problem.level} <= 10">Bronze</span>
+                    <span th:if="${problem.level} >= 11 and ${problem.level} <= 15">Silver</span>
+                    <span th:if="${problem.level} >= 16 and ${problem.level} <= 20">Gold</span>
+                    <span th:if="${problem.level} >= 21 and ${problem.level} <= 25">Platinum</span>
+                    <span th:if="${problem.level} >= 26 and ${problem.level} <= 30">Emerald</span>
+                    <span th:if="${problem.level} >= 31 and ${problem.level} <= 35">Diamond</span>
+                    <span th:if="${problem.level} % 5 == 1">V</span>
+                    <span th:if="${problem.level} % 5 == 2">IV</span>
+                    <span th:if="${problem.level} % 5 == 3">III</span>
+                    <span th:if="${problem.level} % 5 == 4">II</span>
+                    <span th:if="${problem.level} % 5 == 0 and ${problem.level} != 0">I</span>
+                </td>
+                <td><a th:href="@{/problem/{problem}(problem=${problem.id})}" href="#" class="text-decoration-none" style="color:black">[[${problem.id}]]</a></td>
+                <div style="text-align: left;">
+                    <td><a th:href="@{/problem/{problem}(problem=${problem.id})}" class="text-decoration-none" style="color:black;">[[${problem.title}]]</a></td>
+                </div>
+                <td class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Click</button>
+                    <div class="dropdown-menu p-4 text-muted">
+                        <p th:each="tag:${problem.tags}"># [[${tag.name}]]</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col"></div>
+</div>

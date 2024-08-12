@@ -1,0 +1,24 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+      layout:fragment="Content"
+>
+
+    <div>
+        <div style="width:100%; height:100px; background-color:skyblue"></div>
+        <div class="container d-flex align-items-center">
+            <img class="rounded-circle me-1" width="150" height="150" src="https://avatars.githubusercontent.com/u/137270898?s=96&v=4" alt style="position:relative; left:50px; bottom:40px">
+            <div style="width: 100%; margin-left: 6%;">
+                <p class="fw-bold" style="left:70px; bottom:20px; font-size:35px">[[${userName}]]</p>
+                <p class="fw-bold" style="right:30px; top:10px">[[${analysis.ratingTier}]]</p>
+                <div class="progress" style="width:80%; right:220px; top:30px; height:25px">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:50%">[[${analysis.ratingScore}]]</div>
+                </div>
+            </div>
+        </div>
+
+        <th:block layout:fragment="MyPage_Content"></th:block>
+
+    </div>
+</html>

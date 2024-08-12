@@ -1,0 +1,49 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+      layout:fragment="Content"
+>
+
+<div>
+    <div class="container mb-lg-3" style="display:flex;
+     justify-content: center;
+     align-items : center">
+        <div class="card" style="width:600px; height:700px">
+            <div class="container p-4" style="width:550px; height:600px; text-align:center">
+                <p class="fw-bold" style="font-size:25px">회원가입</p>
+                <p style="font-size:13px">회원가입을 위한 창입니다. 계정이 이미 있는 경우에는 <a href="/login">로그인</a>해주세요.</p>
+                <p style="font-size:13px">아이디가 검색에 노출되지 않길 바라시는 경우에는 다른 사이트에서 사용하지 않는 아이디를 사용해주세요.</p>
+                <p style="font-size:13px">가입 후 아이디는 변경할 수 없습니다.</p>
+
+                <div class="container py-4" style="width:500px; height:400px;
+                border-bottom:3px solid #b3b2b2; border-top:3px solid #b3b2b2">
+                    <form th:action="@{/user/register}" th:object="${registerForm}" method="post">
+                        <div class="form-floating w-100 py-2" style="margin:auto">
+                            <input type="email" class="form-control" id="email"
+                                   placeholder="name@example.com" th:field="*{email}">
+                            <label for="email">아이디/이메일</label>
+                        </div>
+                        <div class="form-floating w-100 py-2" style="margin:auto">
+                            <input type="text" class="form-control" id="username"
+                                   placeholder="username" th:field="*{username}">
+                            <label for="username">이름</label>
+                        </div>
+                        <div class="form-floating w-100 py-2" style="margin:auto">
+                            <input type="password" class="form-control" id="password"
+                                   placeholder="Password" th:field="*{password}">
+                            <label for="password">패스워드</label>
+                        </div>
+                        <div class="form-floating w-100 py-2" style="margin:auto">
+                            <input type="text" class="form-control" id="baekjoon"
+                                   placeholder="baekjoon" th:field="*{baekjoon}">
+                            <label for="baekjoon">백준ID</label>
+                        </div>
+                        <button class="btn btn-primary w-25 fw-bold" type="submit" style="float:right">회원가입</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

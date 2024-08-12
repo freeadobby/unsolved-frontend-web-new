@@ -1,0 +1,78 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mypage/layout.html}"
+      layout:fragment="MyPage_Content"
+>
+
+<div class="d-flex gap-5 justify-content-center py-3" style="border-bottom: 3px solid lightgray">
+    <a href="/mypage" class="text-decoration-none fw-bold" style="color:black; border-bottom: 3px solid black">개요</a>
+    <a href="/mypage/today" class="text-decoration-none fw-bold" style="color:black">오늘의 학습목록</a>
+    <a href="/mypage/solved" class="text-decoration-none fw-bold" style="color:black">문제</a>
+    <a href="#" class="text-decoration-none fw-bold" style="color:black">히스토리</a>
+    <a href="#" class="text-decoration-none fw-bold" style="color:black">내가 쓴 글</a>
+</div>
+
+<div class="card p-5 gap-2">
+    <p class="fw-bold" style="font-size:30px">학습 형태</p>
+
+    <div class="row">
+        <div class="col" style="height:40%; width:40%; border-right: 2px solid lightgray">
+            <canvas id="myChart" width="100px" height="100px"></canvas>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script th:inline="javascript">
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['수학', '구현', '자료구조', '정수론', 'DP', '그리디',
+                        '탐색', '그래프', '트리', '투 포인터', '최단 경로', '정렬'],
+                    datasets: [{
+                        label: '# of Yours',
+                        data: [ [[${analysis.tagScore_math}]], [[${analysis.tagScore_implementation}]],
+                            [[${analysis.tagScore_dataStructure}]], [[${analysis.tagScore_NumberTheory}]],
+                            [[${analysis.tagScore_dynamicPrograming}]], [[${analysis.tagScore_Greedy}]],
+                            [[${analysis.tagScore_Search}]], [[${analysis.tagScore_Graph}]],
+                            [[${analysis.tagScore_Tree}]], [[${analysis.tagScore_TwoPointer}]],
+                            [[${analysis.tagScore_ShortestPath}]], [[${analysis.tagScore_Sort}]] ]
+                    },
+                        {
+                            label: '# of UserAverage',
+                            data: [40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        r: {
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <div class="col p-5" style="height:45%; width:45%;">
+            <div class="container gap-5" style="border-bottom: 2px solid lightgray; height:300px;">
+                <span class="fw-bold" style="font-size:30px; padding-bottom: 20px;">종합평가</span>
+                <p style="font-size: 20px">[[${analysis.opinion}]]</p>
+            </div>
+            <div class="container">
+                <span class="fw-bold" style="font-size:30px; padding-bottom: 20px; padding-top: 20px;">학습이 필요한 영역</span>
+                <p style="font-size: 20px">[[${analysis.needLearning}]]</p>
+            </div>
+        </div>
+    </div>
+</div>

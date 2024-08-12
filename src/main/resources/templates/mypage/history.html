@@ -1,0 +1,48 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mypage/layout.html}"
+      layout:fragment="MyPage_Content"
+>
+
+<div class="d-flex gap-5 justify-content-center py-3" style="border-bottom: 3px solid lightgray">
+    <a href="/mypage" class="text-decoration-none fw-bold" style="color:black">개요</a>
+    <a href="/mypage/today" class="text-decoration-none fw-bold" style="color:black;">오늘의 학습목록</a>
+    <a href="/mypage/solved" class="text-decoration-none fw-bold" style="color:black">문제</a>
+    <a href="/mypage/history" class="text-decoration-none fw-bold" style="color:black; border-bottom: 3px solid black">히스토리</a>
+    <a href="#" class="text-decoration-none fw-bold" style="color:black">내가 쓴 글</a>
+</div>
+
+<div class="card fw-bold p-4">
+    <p style="font-size:20px">푼 문제 수</p>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                datasets: [{
+                    label: '# of SolvedProblem',
+                    data: [5, 10, 10, 15, 24, 27, 27, 30, 40, 50, 60, 100],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</div>
